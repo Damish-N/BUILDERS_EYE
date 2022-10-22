@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BE4</string>
+    <string name="already_have_an_account_login_here">Already have an account? <u>login</u></string>
+</resources>
