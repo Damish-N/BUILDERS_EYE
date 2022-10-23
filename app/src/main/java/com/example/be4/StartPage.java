@@ -2,14 +2,12 @@ package com.example.be4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class StartPage extends AppCompatActivity {
-
-     private  LinearLayout supervisorBtn, ownerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,23 +16,17 @@ public class StartPage extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_start_page);
-        supervisorBtn = (LinearLayout) findViewById(R.id.supervierBtn);
+        LinearLayout supervisorBtn = (LinearLayout) findViewById(R.id.supervierBtn);
         supervisorBtn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(StartPage.this, "Clicked owner", Toast.LENGTH_SHORT).show();
-                    }
+                view -> {
+                    Intent intent = new Intent(StartPage.this, OwnerHomePage.class);
+                    startActivity(intent);
+                    Toast.makeText(StartPage.this, "Clicked owner", Toast.LENGTH_SHORT).show();
                 }
         );
-        ownerBtn = (LinearLayout) findViewById(R.id.ownerBtn);
+        LinearLayout ownerBtn = (LinearLayout) findViewById(R.id.ownerBtn);
         ownerBtn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(StartPage.this, "Clicked Supervisor", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                view -> Toast.makeText(StartPage.this, "Clicked Supervisor", Toast.LENGTH_SHORT).show()
         );
     }
 }
