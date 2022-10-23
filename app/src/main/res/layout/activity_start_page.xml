@@ -55,18 +55,22 @@
             android:layout_height="100dp"
             android:padding="10dp"
             android:background="@drawable/round"
+            android:layout_margin="25dp"
             android:layout_marginHorizontal="25dp"
             android:layout_marginVertical="15dp"
+            android:gravity="center"
             >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </LinearLayout>
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="SUPERVISER" />
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -75,10 +79,17 @@
             android:layout_margin="25dp"
             android:layout_marginHorizontal="25dp"
             android:layout_marginVertical="15dp"
-
+            android:gravity="center"
             >
-
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="OWNER" />
 
         </LinearLayout>
 
