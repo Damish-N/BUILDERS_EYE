@@ -45,8 +45,8 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        Map<String,Object> users = new HashMap<>();
-        users.put("f","jskdjdsd");
+        Map<String, Object> users = new HashMap<>();
+        users.put("f", "jskdjdsd");
 
 
         textInputEditTextUsername = findViewById(R.id.usernamelogin);
@@ -87,9 +87,6 @@ public class Login extends AppCompatActivity {
 //                        });
 
 
-
-
-
                 if (!email.isEmpty() && !password.isEmpty()) {
                     textInputEditTextUsername.setEnabled(false);
                     textInputEditTextPassword.setEnabled(false);
@@ -97,13 +94,23 @@ public class Login extends AppCompatActivity {
                     buttonLogin.setEnabled(false);
 
 
-                    mAuth.signInWithEmailAndPassword("d@gmail.com", "12345678")
+                    mAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         progressBar.setVisibility(View.GONE);
                                         Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
+                                        if (email.equals("d@gmail.com")) {
+                                            progressBar.setVisibility(View.GONE);
+                                            Intent intent = new Intent(getApplicationContext(), OwnerHomePage.class);
+                                            startActivity(intent);
+                                            finish();
+                                            Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(Login.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                                        }
+
                                     } else {
                                         progressBar.setVisibility(View.GONE);
                                         textInputEditTextUsername.setEnabled(true);
