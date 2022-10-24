@@ -113,6 +113,7 @@
 
           </LinearLayout>
           <LinearLayout
+              android:id="@+id/onGoingBtn"
               android:layout_width="match_parent"
               android:layout_height="100dp"
               android:padding="10dp"
@@ -148,6 +149,7 @@
 
           </LinearLayout>
           <LinearLayout
+              android:id="@+id/reports"
               android:layout_width="match_parent"
               android:layout_height="100dp"
               android:padding="10dp"

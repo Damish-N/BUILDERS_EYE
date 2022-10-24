@@ -16,6 +16,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BE4">
         <activity
+            android:name=".Reports"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".OnGoingSites"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainStoreOwner"
             android:exported="false">
             <meta-data
