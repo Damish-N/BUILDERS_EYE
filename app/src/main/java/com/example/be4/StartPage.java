@@ -19,7 +19,7 @@ public class StartPage extends AppCompatActivity {
         LinearLayout supervisorBtn = (LinearLayout) findViewById(R.id.supervierBtn);
         supervisorBtn.setOnClickListener(
                 view -> {
-                    Intent intent = new Intent(StartPage.this, OwnerHomePage.class);
+                    Intent intent = new Intent(StartPage.this, Login.class);
                     startActivity(intent);
                     Toast.makeText(StartPage.this, "Clicked owner", Toast.LENGTH_SHORT).show();
                 }

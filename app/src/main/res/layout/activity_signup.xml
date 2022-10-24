@@ -20,8 +20,8 @@
             android:fontFamily="@font/poppinsbold"
             android:gravity="center"
             android:text="signup"
-            android:textSize="30sp"
             android:textColor="@color/colorAccent"
+            android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
-            android:hint="fullname"
+            android:hint="First Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,28 +47,6 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_name"
                 android:drawableRight="@drawable/ic_name"
-                android:fontFamily="@font/poppinsmedium"
-                tools:targetApi="jelly_bean" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:hint="email"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFullname">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_email"
-                android:drawableRight="@drawable/ic_email"
                 android:fontFamily="@font/poppinsmedium"
                 tools:targetApi="jelly_bean" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -95,6 +73,30 @@
                 tools:targetApi="jelly_bean" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:hint="email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutFullname">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_email"
+                android:drawableRight="@drawable/ic_email"
+                android:fontFamily="@font/poppinsmedium"
+                tools:targetApi="jelly_bean" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutPassword"
             android:layout_width="match_parent"
@@ -109,10 +111,10 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
                 android:drawableEnd="@drawable/ic_pass"
                 android:drawableRight="@drawable/ic_pass"
                 android:fontFamily="@font/poppinsmedium"
+                android:inputType="textPassword"
                 tools:targetApi="jelly_bean" />
         </com.google.android.material.textfield.TextInputLayout>
 
