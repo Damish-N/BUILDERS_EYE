@@ -17,6 +17,8 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true">
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,22 +45,54 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="25dp">
+        <EditText
+            android:background="@drawable/round"
+            android:id="@+id/idEdtItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="15dp"
+            android:hint="Enter item name to add in ist" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="15dp"
+            android:gravity="right">
+            <Button
+                android:gravity="center"
+                android:id="@+id/addItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="4dp"
+                android:text="Add"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/round"
         android:layout_marginHorizontal="25dp"
+        android:layout_weight="5"
         android:layout_marginTop="10dp">
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"
+           android:layout_height="500dp"
            android:orientation="vertical">
            <ListView
                android:id="@+id/mainItem"
-               android:layout_width="match_parent"
-               android:layout_height="300dp"
+               android:layout_width="wrap_content"
+               android:layout_height="240dp"
                android:layout_margin="10dp"></ListView>
        </LinearLayout>
 
@@ -73,12 +107,12 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/addItem"
+            android:id="@+id/updateItems"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_margin="4dp"
-            android:text="Add new Item"
+            android:text="Update List"
             />
     </LinearLayout>
 

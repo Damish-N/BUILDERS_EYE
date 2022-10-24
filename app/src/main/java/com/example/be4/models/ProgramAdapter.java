@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 public class ProgramAdapter extends ArrayAdapter<String> {
     Context context;
-    String[] itemName;
-    String[] itemCount;
+    ArrayList<String> itemName;
+    ArrayList<String> itemCount;
 
-    public ProgramAdapter(Context context, String[] itemName, String[] itemCount) {
+    public ProgramAdapter(Context context, ArrayList<String> itemName, ArrayList<String> itemCount) {
         super(context, R.layout.single_card, R.id.itemNameCard, itemName);
         this.context = context;
         this.itemName = itemName;
@@ -44,22 +44,22 @@ public class ProgramAdapter extends ArrayAdapter<String> {
             holder = (ProgramViewHolder) singleItem.getTag();
         }
 
-        holder.itemName.setText(itemName[position]);
-        System.out.println(itemCount[position]);
-        holder.itemCount.setText(itemCount[position]);
+        holder.itemName.setText(itemName.get(position));
+        System.out.println(itemCount.get(position));
+        holder.itemCount.setText(itemCount.get(position));
 
         ProgramViewHolder finalHolder = holder;
-        final int[] val = {Integer.parseInt(itemCount[position])};
+        final int[] val = {Integer.parseInt(itemCount.get(position))};
         holder.btnMinus.setOnClickListener(
                 view -> {
                     if(val[0]>0){
                         val[0] = --val[0];
-                        itemCount[position] = String.valueOf(val[0]);
+                        itemCount.set(position, String.valueOf(val[0]));
                         finalHolder.itemCount.setText(String.valueOf(val[0]));
                         Toast.makeText(context, "minus here "+ val[0], Toast.LENGTH_SHORT).show();
                     }else {
                         val[0] = 0;
-                        itemCount[position] = "0";
+                        itemCount.set(position, "0");
                         Toast.makeText(context, "Cannot be item value "+ val[0], Toast.LENGTH_SHORT).show();
                     }
                   }
@@ -68,7 +68,7 @@ public class ProgramAdapter extends ArrayAdapter<String> {
                 view -> {
                     if(val[0]>=0){
                         val[0] = ++val[0];
-                        itemCount[position] = String.valueOf(val[0]);
+                        itemCount.set(position, String.valueOf(val[0]));
                         finalHolder.itemCount.setText(String.valueOf(val[0]));
                         Toast.makeText(context, "minus here "+ val[0], Toast.LENGTH_SHORT).show();
                     }else {
@@ -78,5 +78,8 @@ public class ProgramAdapter extends ArrayAdapter<String> {
         );
 
         return singleItem;
+    }
+
+    public void notifyDataSetChanged(MainStoreOwner mainStoreOwner, ArrayList<String> itemNames, ArrayList<String> itemCounts) {
     }
 }

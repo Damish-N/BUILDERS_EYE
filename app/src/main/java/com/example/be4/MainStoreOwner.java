@@ -19,12 +19,12 @@ import java.util.Objects;
 public class MainStoreOwner extends AppCompatActivity {
 
     private ListView languageLV;
-    private Button addBtn;
+    private Button addBtn,updateItems;
     private EditText itemEdt;
     private ArrayList<String> lngList;
 
-    String[] itemNames = {"item-1"};
-    String[] itemCounts = {"15"};
+    ArrayList<String> itemNames = new ArrayList<>() ;
+    ArrayList<String> itemCounts = new ArrayList<>();
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,14 +35,22 @@ public class MainStoreOwner extends AppCompatActivity {
 
         languageLV = findViewById(R.id.mainItem);
         addBtn = findViewById(R.id.addItem);
+        updateItems=findViewById(R.id.updateItems);
+        itemEdt = findViewById(R.id.idEdtItemName);
+
+        itemNames.add("item-1");
+        itemNames.add("item-2");
+
+        itemCounts.add("1");
+        itemCounts.add("5");
 
 
         ProgramAdapter programAdapter = new ProgramAdapter(this, itemNames, itemCounts);
         languageLV.setAdapter(programAdapter);
 
-        addBtn.setOnClickListener(
+        updateItems.setOnClickListener(
                 view -> {
-                    System.out.println("new value of " + itemCounts[0].toLowerCase());
+                    System.out.println("new value of " + itemCounts.get(0).toLowerCase());
                 }
         );
 
@@ -50,25 +58,25 @@ public class MainStoreOwner extends AppCompatActivity {
 //        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lngList);
 //        languageLV.setAdapter(adapter);
 
-//        addBtn.setOnClickListener(
-//                view -> {
-//                    String item = itemEdt.getText().toString();
-//                    String count = "0";
-//
-//                    // on below line we are checking if item is not empty
-//                    if (!item.isEmpty()) {
-//
-//                        // on below line we are adding item to our list.
-////                        lngList.add(item);
-//                        itemNames.add(item);
-//                        itemCounts.add(count);
-//                        // on below line we are notifying adapter
-//                        // that data in list is updated to
-//                        // update our list view.
-//                        programAdapter.notifyDataSetChanged(MainStoreOwner.this,itemNames,itemCounts);
-//                    }
-//                }
-//        );
+        addBtn.setOnClickListener(
+                view -> {
+                    String item = itemEdt.getText().toString();
+                    String count = "0";
+
+                    // on below line we are checking if item is not empty
+                    if (!item.isEmpty()) {
+
+                        // on below line we are adding item to our list.
+//                        lngList.add(item);
+                        itemNames.add(item);
+                        itemCounts.add(count);
+                        // on below line we are notifying adapter
+                        // that data in list is updated to
+                        // update our list view.
+                        programAdapter.notifyDataSetChanged();
+                    }
+                }
+        );
 
     }
 }
