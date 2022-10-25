@@ -20,6 +20,13 @@
         android:theme="@style/Theme.BE4"
         tools:targetApi="n">
         <activity
+            android:name=".SuperviserHomePage"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UpdateItemPage"
             android:exported="false">
             <meta-data
