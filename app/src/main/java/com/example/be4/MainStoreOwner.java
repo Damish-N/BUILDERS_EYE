@@ -84,11 +84,6 @@ public class MainStoreOwner extends AppCompatActivity {
         updateItems = findViewById(R.id.updateItems);
         itemEdt = findViewById(R.id.idEdtItemName);
 
-//        itemNames.add("item-1");
-//        itemNames.add("item-2");
-//
-//        itemCounts.add("1");
-//        itemCounts.add("5");
 
 
         ProgramAdapter programAdapter = new ProgramAdapter(this, itemNames, itemCounts);
