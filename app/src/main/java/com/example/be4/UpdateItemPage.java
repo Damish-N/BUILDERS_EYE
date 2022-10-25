@@ -19,10 +19,12 @@ public class UpdateItemPage extends AppCompatActivity {
         Intent intent = getIntent();
         itemNameDescription = findViewById(R.id.itemNameDescription);
         countItem = findViewById(R.id.countItem);
+        String id;
 
-
+        id = intent.getStringExtra("id");
         itemNameDescription.setText(intent.getStringExtra("itemName"));
         countItem.setText(intent.getStringExtra("count"));
+
 
     }
 }

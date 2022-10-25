@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class OnGoingSites extends AppCompatActivity {
@@ -27,7 +29,6 @@ public class OnGoingSites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_goning_sites);
         Objects.requireNonNull(getSupportActionBar()).hide();
-
 
         siteListView = findViewById(R.id.sectionItems);
         addBtn = findViewById(R.id.addItemSite);

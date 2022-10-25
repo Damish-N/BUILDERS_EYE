@@ -6,14 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.be4.MainStoreOwner;
 import com.example.be4.R;
-import com.example.be4.Signup;
 import com.example.be4.UpdateItemPage;
 
 import java.util.ArrayList;
@@ -22,10 +20,12 @@ public class ProgramAdapter extends ArrayAdapter<String> {
     Context context;
     ArrayList<String> itemName;
     ArrayList<String> itemCount;
+    ArrayList<String> itemId;
 
-    public ProgramAdapter(Context context, ArrayList<String> itemName, ArrayList<String> itemCount) {
+    public ProgramAdapter(Context context,ArrayList<String>itemId, ArrayList<String> itemName, ArrayList<String> itemCount) {
         super(context, R.layout.single_card, R.id.itemNameCard, itemName);
         this.context = context;
+        this.itemId = itemId;
         this.itemName = itemName;
         this.itemCount = itemCount;
     }
@@ -70,6 +70,7 @@ public class ProgramAdapter extends ArrayAdapter<String> {
         holder.updateBtnOwner.setOnClickListener(
                 view -> {
                     Intent intent = new Intent(getContext(), UpdateItemPage.class);
+                    intent.putExtra("id",itemId.get(position));
                     intent.putExtra("itemName", itemName.get(position));
                     intent.putExtra("count", itemCount.get(position));
                     context.startActivity(intent);
