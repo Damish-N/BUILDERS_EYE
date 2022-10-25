@@ -56,12 +56,17 @@ public class MainStoreOwner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_store_owner);
         Objects.requireNonNull(getSupportActionBar()).hide();
-//        progressBar.findViewById(R.id.progressBarOwner);
-//        progressBar.setVisibility(View.VISIBLE);
+        progressBar = findViewById(R.id.progressBarOwner);
         editArea = findViewById(R.id.editArea);
         viewArea = findViewById(R.id.viewArea);
+        languageLV = findViewById(R.id.mainItem);
+        addBtn = findViewById(R.id.addItem);
+        updateItems = findViewById(R.id.updateItems);
+        itemEdt = findViewById(R.id.idEdtItemName);
+        progressBar.setVisibility(View.VISIBLE);
         editArea.setVisibility(View.GONE);
         viewArea.setVisibility(View.GONE);
+        updateItems.setVisibility(View.GONE);
 
         db.collection("items").get()
                 .addOnCompleteListener(
@@ -76,9 +81,11 @@ public class MainStoreOwner extends AppCompatActivity {
                                         itemNames.add(document.getData().get("itemName").toString());
                                         itemCounts.add(document.getData().get("count").toString());
                                     }
-//                                    progressBar.setVisibility(View.VISIBLE);
+                                    progressBar.setVisibility(View.GONE);
                                     editArea.setVisibility(View.VISIBLE);
                                     viewArea.setVisibility(View.VISIBLE);
+                                    updateItems.setVisibility(View.VISIBLE);
+
                                 } else {
                                     Toast.makeText(MainStoreOwner.this, "empty", Toast.LENGTH_SHORT).show();
                                 }
@@ -87,13 +94,7 @@ public class MainStoreOwner extends AppCompatActivity {
                 );
 
 
-        languageLV = findViewById(R.id.mainItem);
-        addBtn = findViewById(R.id.addItem);
-        updateItems = findViewById(R.id.updateItems);
-        itemEdt = findViewById(R.id.idEdtItemName);
-
-
-        ProgramAdapter programAdapter = new ProgramAdapter(this,itemIds, itemNames, itemCounts);
+        ProgramAdapter programAdapter = new ProgramAdapter(this, itemIds, itemNames, itemCounts);
         languageLV.setAdapter(programAdapter);
 
         updateItems.setOnClickListener(
