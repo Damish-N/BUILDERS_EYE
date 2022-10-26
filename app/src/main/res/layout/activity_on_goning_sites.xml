@@ -53,40 +53,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"
-            android:background="@drawable/round"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/idEdtSiteName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/round"
-                android:hint="Enter item name to add in ist"
-                android:padding="15dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:paddingRight="15dp">
-
-                <Button
-                    android:id="@+id/addItemSite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="4dp"
-                    android:gravity="center"
-                    android:text="Add"
-                    android:textAllCaps="false" />
-            </LinearLayout>
-
-        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -111,21 +77,7 @@
 
         </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/updateSections"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="4dp"
-                android:text="Update List" />
-        </LinearLayout>
 
 
     </LinearLayout>
