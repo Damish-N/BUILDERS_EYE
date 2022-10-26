@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +57,12 @@ public class Login extends AppCompatActivity {
         textviewSignup = findViewById(R.id.signUpText);
         progressBar = findViewById(R.id.progress);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+// Creating an Editor object to edit(write to the file)
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+
         textviewSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,36 +102,37 @@ public class Login extends AppCompatActivity {
                     buttonLogin.setEnabled(false);
 
 
-                    mAuth.signInWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
-                                        if (email.equals("d@gmail.com")) {
-                                            progressBar.setVisibility(View.GONE);
-                                            Intent intent = new Intent(getApplicationContext(), OwnerHomePage.class);
-                                            startActivity(intent);
-                                            finish();
-                                            Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            progressBar.setVisibility(View.GONE);
-                                            Intent intent = new Intent(getApplicationContext(), SuperviserHomePage.class);
-                                            startActivity(intent);
-                                            finish();
-                                            Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    } else {
-                                        progressBar.setVisibility(View.GONE);
-                                        textInputEditTextUsername.setEnabled(true);
-                                        textInputEditTextPassword.setEnabled(true);
-                                        buttonLogin.setEnabled(true);
-                                        Toast.makeText(Login.this, "Login Unsurenesss", Toast.LENGTH_SHORT).show();
-                                    }
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                myEdit.putString("email", email);
+                                myEdit.commit();
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
+                                if (email.equals("d@gmail.com")) {
+                                    progressBar.setVisibility(View.GONE);
+                                    Intent intent = new Intent(getApplicationContext(), OwnerHomePage.class);
+                                    startActivity(intent);
+                                    finish();
+                                    Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                    Intent intent = new Intent(getApplicationContext(), SuperviserHomePage.class);
+                                    startActivity(intent);
+                                    finish();
+                                    Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
                                 }
-                            });
+
+                            } else {
+                                progressBar.setVisibility(View.GONE);
+                                textInputEditTextUsername.setEnabled(true);
+                                textInputEditTextPassword.setEnabled(true);
+                                buttonLogin.setEnabled(true);
+                                Toast.makeText(Login.this, "Login Unsurenesss", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
 
                 } else {

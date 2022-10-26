@@ -3,7 +3,9 @@ package com.example.be4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,14 @@ public class OwnerHomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_home_page);
+
+
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String s1 = sh.getString("email", "");
+
+        System.out.println("Your email is:" + s1);
+
+
         Objects.requireNonNull(getSupportActionBar()).hide();
         loginBtn = findViewById(R.id.logOut);
         loginBtn.setOnClickListener(
