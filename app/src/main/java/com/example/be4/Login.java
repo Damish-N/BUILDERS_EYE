@@ -25,6 +25,7 @@ import static java.lang.String.valueOf;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Login extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -108,7 +109,11 @@ public class Login extends AppCompatActivity {
                                             finish();
                                             Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(Login.this, "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                                            progressBar.setVisibility(View.GONE);
+                                            Intent intent = new Intent(getApplicationContext(), SuperviserHomePage.class);
+                                            startActivity(intent);
+                                            finish();
+                                            Toast.makeText(Login.this, "Login Success", Toast.LENGTH_SHORT).show();
                                         }
 
                                     } else {
