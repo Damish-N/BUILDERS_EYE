@@ -53,8 +53,20 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            >
+            <ProgressBar
+                android:id="@+id/progressBarOnGoing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
 
         <ScrollView
+            android:id="@+id/scrollViewOnGoing"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="25dp"
