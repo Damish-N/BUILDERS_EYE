@@ -15,7 +15,7 @@ import java.util.Objects;
 public class OwnerHomePage extends AppCompatActivity {
 
     Button loginBtn;
-    LinearLayout mainStoreBtn, onGoingBtn, reportsBtn;
+    LinearLayout mainStoreBtn, onGoingBtn, addASite;
 
     //    @SuppressLint("MissingInflatedId")
     @SuppressLint("MissingInflatedId")
@@ -35,7 +35,7 @@ public class OwnerHomePage extends AppCompatActivity {
         );
         mainStoreBtn = (LinearLayout) findViewById(R.id.mm);
         onGoingBtn = (LinearLayout) findViewById(R.id.onGoingBtn);
-        reportsBtn = (LinearLayout) findViewById(R.id.reports);
+        addASite = (LinearLayout) findViewById(R.id.addASite);
         mainStoreBtn.setOnClickListener(
                 view -> {
                     Intent intent = new Intent(OwnerHomePage.this, MainStoreOwner.class);
@@ -51,9 +51,9 @@ public class OwnerHomePage extends AppCompatActivity {
 //                    Toast.makeText(OwnerHomePage.this, "Clicked owner", Toast.LENGTH_SHORT).show();
                 }
         );
-        reportsBtn.setOnClickListener(
+        addASite.setOnClickListener(
                 view -> {
-                    Intent intent = new Intent(OwnerHomePage.this, Reports.class);
+                    Intent intent = new Intent(OwnerHomePage.this, AddSite.class);
                     startActivity(intent);
                 }
         );

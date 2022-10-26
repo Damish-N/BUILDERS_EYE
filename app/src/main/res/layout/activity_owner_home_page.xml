@@ -149,7 +149,7 @@
 
           </LinearLayout>
           <LinearLayout
-              android:id="@+id/reports"
+              android:id="@+id/addASite"
               android:layout_width="match_parent"
               android:layout_height="100dp"
               android:padding="10dp"
@@ -168,7 +168,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:text="Reports" />
+                android:text="Add A Site" />
 
             <Space
                 android:layout_width="0dp"
@@ -179,7 +179,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/report"
+                android:src="@drawable/addicon"
                 >
             </ImageView>
 
