@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class SuperviserHomePage extends AppCompatActivity {
 
     LinearLayout mainStoreSupervisor, onGoingSitesSupervisor, supervisorProjectBtn;
+    Button logOutSupervisor;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -34,36 +36,39 @@ public class SuperviserHomePage extends AppCompatActivity {
         mainStoreSupervisor = (LinearLayout) findViewById(R.id.mainStoreSupervisor);
         onGoingSitesSupervisor = (LinearLayout) findViewById(R.id.onGoingSitesSupervisor);
         supervisorProjectBtn = (LinearLayout) findViewById(R.id.supervisorProjectBtn);
+        logOutSupervisor = findViewById(R.id.logOutSupervisor);
 
-        mainStoreSupervisor.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(SuperviserHomePage.this, MainStoreOwner.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+        mainStoreSupervisor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SuperviserHomePage.this, MainStoreOwner.class);
+                startActivity(intent);
+            }
+        });
 
-        onGoingSitesSupervisor.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(SuperviserHomePage.this, OnGoingSites.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+        onGoingSitesSupervisor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SuperviserHomePage.this, OnGoingSites.class);
+                startActivity(intent);
+            }
+        });
 
-        supervisorProjectBtn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(SuperviserHomePage.this, "Clicked His project Button", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        );
+        supervisorProjectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SuperviserHomePage.this, "Clicked His project Button", Toast.LENGTH_SHORT).show();
+            }
+        });
+        logOutSupervisor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SuperviserHomePage.this, StartPage.class);
+                startActivity(intent);
+                Toast.makeText(SuperviserHomePage.this, "Log out", Toast.LENGTH_SHORT).show();
 
+            }
+        });
 
     }
 }
