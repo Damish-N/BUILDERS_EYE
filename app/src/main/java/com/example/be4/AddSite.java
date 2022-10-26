@@ -33,7 +33,7 @@ import java.util.Objects;
 public class AddSite extends AppCompatActivity {
 
     public ArrayList<String> supervisorList = new ArrayList<String>();
-    public ArrayList<String> supervisorIDList = new ArrayList<String>();
+    public ArrayList<String> supervisorEmailList = new ArrayList<String>();
 
     public String[] items = new String[]{"Select Supervisor", "item2", "item3"};
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -63,7 +63,7 @@ public class AddSite extends AppCompatActivity {
         addASiteBtn.setVisibility(View.GONE);
 
         supervisorList.add("Select Supervisor");
-        supervisorIDList.add("No Id");
+        supervisorEmailList.add("No Id");
 
         getTheSupervisorList();
 
@@ -95,7 +95,7 @@ public class AddSite extends AppCompatActivity {
     private void saveTheSite(int selectedItemPosition, Editable text, Spinner itemsSpinner) {
         siteMap.put("siteName", text.toString());
         siteMap.put("supName", itemsSpinner.getSelectedItem());
-        siteMap.put("supId", supervisorIDList.get(selectedItemPosition));
+        siteMap.put("supEmail", supervisorEmailList.get(selectedItemPosition));
         db.collection("sites")
                 .add(siteMap)
                 .addOnCompleteListener(
@@ -139,7 +139,7 @@ public class AddSite extends AppCompatActivity {
                                         String name;
                                         name = document.getData().get("firstName").toString() + " " + document.getData().get("lastName").toString();
                                         supervisorList.add(name);
-                                        supervisorIDList.add(document.getId());
+                                        supervisorEmailList.add(document.getData().get("email").toString());
                                         progressBar.setVisibility(View.GONE);
                                         sectionForm.setVisibility(View.VISIBLE);
                                         addASiteBtn.setVisibility(View.VISIBLE);
