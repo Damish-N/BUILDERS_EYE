@@ -48,6 +48,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        >
+        <ProgressBar
+            android:id="@+id/progressBarOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/editArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/round"
         android:orientation="vertical"
         android:layout_marginHorizontal="25dp">
@@ -78,6 +90,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/viewArea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/round"

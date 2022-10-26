@@ -9,14 +9,14 @@ import com.example.be4.R;
 public class ProgramViewHolder {
     TextView itemName;
     TextView itemCount;
-    Button btnPlus;
-    Button btnMinus;
+    Button updateBtnOwner;
+//    Button btnMinus;
 
     ProgramViewHolder(View v){
         itemName = v.findViewById(R.id.itemNameCard);
         itemCount = v.findViewById(R.id.itemCountCard);
-        btnPlus = v.findViewById(R.id.plusBtn);
-        btnMinus = v.findViewById(R.id.minusBtn);
+        updateBtnOwner = v.findViewById(R.id.updateBtnOwner);
+//        btnMinus = v.findViewById(R.id.minusBtn);
     }
 
 }

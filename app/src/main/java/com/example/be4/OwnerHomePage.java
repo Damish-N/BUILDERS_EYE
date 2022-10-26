@@ -3,7 +3,9 @@ package com.example.be4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +17,7 @@ import java.util.Objects;
 public class OwnerHomePage extends AppCompatActivity {
 
     Button loginBtn;
-    LinearLayout mainStoreBtn, onGoingBtn, reportsBtn;
+    LinearLayout mainStoreBtn, onGoingBtn, addASite;
 
     //    @SuppressLint("MissingInflatedId")
     @SuppressLint("MissingInflatedId")
@@ -23,6 +25,14 @@ public class OwnerHomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_home_page);
+
+
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String s1 = sh.getString("email", "");
+
+        System.out.println("Your email is:" + s1);
+
+
         Objects.requireNonNull(getSupportActionBar()).hide();
         loginBtn = findViewById(R.id.logOut);
         loginBtn.setOnClickListener(
@@ -35,7 +45,7 @@ public class OwnerHomePage extends AppCompatActivity {
         );
         mainStoreBtn = (LinearLayout) findViewById(R.id.mm);
         onGoingBtn = (LinearLayout) findViewById(R.id.onGoingBtn);
-        reportsBtn = (LinearLayout) findViewById(R.id.reports);
+        addASite = (LinearLayout) findViewById(R.id.addASite);
         mainStoreBtn.setOnClickListener(
                 view -> {
                     Intent intent = new Intent(OwnerHomePage.this, MainStoreOwner.class);
@@ -51,9 +61,9 @@ public class OwnerHomePage extends AppCompatActivity {
 //                    Toast.makeText(OwnerHomePage.this, "Clicked owner", Toast.LENGTH_SHORT).show();
                 }
         );
-        reportsBtn.setOnClickListener(
+        addASite.setOnClickListener(
                 view -> {
-                    Intent intent = new Intent(OwnerHomePage.this, Reports.class);
+                    Intent intent = new Intent(OwnerHomePage.this, AddSite.class);
                     startActivity(intent);
                 }
         );
