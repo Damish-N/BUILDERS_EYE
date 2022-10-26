@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.be4.models.Item;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -96,6 +97,12 @@ public class AddSite extends AppCompatActivity {
         siteMap.put("siteName", text.toString());
         siteMap.put("supName", itemsSpinner.getSelectedItem());
         siteMap.put("supEmail", supervisorEmailList.get(selectedItemPosition));
+        ArrayList<Item> itemsOfList = new ArrayList<>();
+        Item itemOfSite = new Item("0", 0);
+        Item itemOfSite1 = new Item("0", 0);
+        itemsOfList.add(itemOfSite);
+        itemsOfList.add(itemOfSite1);
+        siteMap.put("siteItems", itemsOfList);
         db.collection("sites")
                 .add(siteMap)
                 .addOnCompleteListener(

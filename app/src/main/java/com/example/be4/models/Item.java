@@ -9,6 +9,10 @@ public class Item {
         this.count = count;
     }
 
+    public Item(){
+
+    }
+
     public String getItemName() {
         return itemName;
     }
