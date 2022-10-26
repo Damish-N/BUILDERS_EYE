@@ -57,6 +57,8 @@ public class SuperviserHomePage extends AppCompatActivity {
         supervisorProjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(SuperviserHomePage.this, SupervisorProjects.class);
+                startActivity(intent);
                 Toast.makeText(SuperviserHomePage.this, "Clicked His project Button", Toast.LENGTH_SHORT).show();
             }
         });
