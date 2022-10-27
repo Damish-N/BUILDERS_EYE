@@ -19,14 +19,19 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
     ArrayList<String> itemName;
     ArrayList<String> itemCount;
     ArrayList<String> itemId;
+    ArrayList<Item> itemArrayList;
+    ArrayList<String> itemRemainList;
 
-    public ProgramAdapterForSite(Context context,ArrayList<String>itemId, ArrayList<String> itemName, ArrayList<String> itemCount) {
+    public ProgramAdapterForSite(Context context, ArrayList<String> itemId, ArrayList<String> itemName, ArrayList<String> itemCount, ArrayList<Item> itemArrayList, ArrayList<String> itemRemainList) {
         super(context, R.layout.single_card, R.id.itemNameCard, itemName);
         this.context = context;
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemCount = itemCount;
+        this.itemArrayList = itemArrayList;
+        this.itemRemainList = itemRemainList;
     }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -45,11 +50,12 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
         }
 
         holder.itemName.setText(itemName.get(position));
-        System.out.println(itemCount.get(position));
-        holder.itemCount.setText(itemCount.get(position));
+        System.out.println("position :" + position);
+        holder.itemCount.setText("Selected :"+itemCount.get(position) + "AI: " + itemRemainList.get(position));
 
         ProgramViewHolderSupervisor finalHolder = holder;
         final int[] val = {Integer.parseInt(itemCount.get(position))};
+        final int[] remain = {Integer.parseInt(itemRemainList.get(position))};
         holder.minusBtn.setOnClickListener(
                 view -> {
 //                    if(val[0]>0){
@@ -60,12 +66,20 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
 //                    }else {
 //                        val[0] = 0;
 //                        itemCount.set(position, "0");
-                        Toast.makeText(context, "Cannot be item value ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Cannot be item value ", Toast.LENGTH_SHORT).show();
 //                    }
-                  }
+                }
         );
         holder.plusBtn.setOnClickListener(
                 view -> {
+                    int p = position;
+                    if (remain[0] > 0) {
+                        --remain[0];
+                        System.out.println(itemArrayList.get(p).count);
+                        ++val[0];
+                        finalHolder.itemCount.setText("Selected :"+val[0] + "  AI:  " + remain[0]);
+                        itemCount.set(p, String.valueOf(val[0]));
+                    }
 //                    Intent intent = new Intent(getContext(), UpdateItemPage.class);
 //                    intent.putExtra("id",itemId.get(position));
 //                    intent.putExtra("itemName", itemName.get(position));

@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -38,7 +39,7 @@ public class SupSelectProject extends AppCompatActivity {
 
     ProgressBar progressBarSelectProject;
     ScrollView selectSupProjectScroll;
-    LinearLayout basicDataProject, spinnerArea;
+    LinearLayout basicDataProject, spinnerArea, btnArea;
     TextView projectName, projectSupName;
     ArrayList<Item> itemArrayList;
     ArrayList<Item> supervisorSelectedList;
@@ -46,13 +47,14 @@ public class SupSelectProject extends AppCompatActivity {
     ArrayList<String> spinnerItemList;
     ArrayList<String> itemNames = new ArrayList<>();
     ArrayList<String> itemListId = new ArrayList<>();
-    ;
     ArrayList<String> itemListItemCounts = new ArrayList<>();
+    ArrayList<String> itemRemainList =new ArrayList<>();
     FirebaseFirestore db;
     SiteDetails siteDetail;
     ArrayAdapter adapter;
     Spinner spinner;
     ListView projectsSectionsListView;
+    Button addItemBtn;
 
 //    ArrayAdapter adapter = new ArrayAdapter(AddSite.this, R.layout.support_simple_spinner_dropdown_item, supervisorList);
 
@@ -71,6 +73,8 @@ public class SupSelectProject extends AppCompatActivity {
         spinnerArea = findViewById(R.id.spinnerArea);
         spinner = findViewById(R.id.itemListSup);
         projectsSectionsListView = findViewById(R.id.projectsSectionsListView);
+        addItemBtn = findViewById(R.id.addItemBtn);
+        btnArea = findViewById(R.id.btnArea);
 
         Intent intent = getIntent();
         itemArrayList = new ArrayList<>();
@@ -90,6 +94,7 @@ public class SupSelectProject extends AppCompatActivity {
         basicDataProject.setVisibility(View.GONE);
         selectSupProjectScroll.setVisibility(View.GONE);
         spinnerArea.setVisibility(View.GONE);
+        btnArea.setVisibility(View.GONE);
 
         getTheItemSet();
 
@@ -152,7 +157,7 @@ public class SupSelectProject extends AppCompatActivity {
         adapter = new ArrayAdapter(SupSelectProject.this, R.layout.support_simple_spinner_dropdown_item, spinnerItemList);
         spinner.setAdapter(adapter);
 
-        ProgramAdapterForSite programAdapter = new ProgramAdapterForSite(this, itemListId, itemNames, itemListItemCounts);
+        ProgramAdapterForSite programAdapter = new ProgramAdapterForSite(this, itemListId, itemNames, itemListItemCounts,itemArrayList,itemRemainList);
         projectsSectionsListView.setAdapter(programAdapter);
 
 
@@ -160,6 +165,33 @@ public class SupSelectProject extends AppCompatActivity {
         basicDataProject.setVisibility(View.VISIBLE);
         selectSupProjectScroll.setVisibility(View.VISIBLE);
         spinnerArea.setVisibility(View.VISIBLE);
+        btnArea.setVisibility(View.VISIBLE);
+
+
+        addItemBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Toast.makeText(SupSelectProject.this, Integer.toString(spinner.getSelectedItemPosition()), Toast.LENGTH_SHORT).show();
+                        int i = spinner.getSelectedItemPosition() - 1;
+                        if (spinner.getSelectedItemPosition() != 0) {
+                            itemListId.add(itemArrayList.get(i).getId());
+                            itemNames.add(itemArrayList.get(i).getItemName());
+                            itemRemainList.add( Integer.toString(itemArrayList.get(i).getCount()));
+//                            Integer.toString(itemArrayList.get(i).getCount())
+                            itemListItemCounts.add("0");
+
+                            spinnerItemList.remove(spinner.getSelectedItemPosition());
+                            itemArrayList.remove(i);
+
+//                            after Adding
+                        }
+                        programAdapter.notifyDataSetChanged();
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+        );
 
     }
 
@@ -181,7 +213,7 @@ public class SupSelectProject extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
+                Toast.makeText(SupSelectProject.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
