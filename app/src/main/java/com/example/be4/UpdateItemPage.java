@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class UpdateItemPage extends AppCompatActivity {
 
     TextView itemNameDescription, countItem;
-    Button addItemPlus, addItemMinus,updateTheItem;
+    Button addItemPlus, addItemMinus, updateTheItem;
     FirebaseFirestore firebaseFirestore;
 
 
@@ -69,7 +69,7 @@ public class UpdateItemPage extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        itemDoc.update( "count", n)
+                        itemDoc.update("count", n)
                                 .addOnSuccessListener(
                                         new OnSuccessListener<Void>() {
                                             @Override
@@ -84,15 +84,13 @@ public class UpdateItemPage extends AppCompatActivity {
                                         new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-
+                                                Toast.makeText(UpdateItemPage.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                 );
                     }
                 }
         );
-
-
 
 
     }

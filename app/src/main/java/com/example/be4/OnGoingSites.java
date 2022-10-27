@@ -145,11 +145,24 @@ public class OnGoingSites extends AppCompatActivity {
 
                 text1.setText("Site Name: " + OnGoingSites.this.siteArrayList.get(position).getSiteName());
                 text2.setText("Site Sup Name: " + OnGoingSites.this.siteArrayList.get(position).getSupervisorName());
+
+                view.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(OnGoingSites.this, Integer.toString(position), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+
+
                 return view;
             }
         };
 
         siteListView.setAdapter(adapter);
+
+
     }
 
 

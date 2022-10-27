@@ -20,6 +20,20 @@
         android:theme="@style/Theme.BE4"
         tools:targetApi="n">
         <activity
+            android:name=".SupSelectProject"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".SupervisorProjects"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddSite"
             android:exported="false">
             <meta-data
