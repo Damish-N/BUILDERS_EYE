@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.be4.models.Item;
+import com.example.be4.models.ProgramAdapter;
+import com.example.be4.models.ProgramAdapterForSite;
 import com.example.be4.models.SiteDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,10 +44,15 @@ public class SupSelectProject extends AppCompatActivity {
     ArrayList<Item> supervisorSelectedList;
     ArrayList<Item> filerArrayList;
     ArrayList<String> spinnerItemList;
+    ArrayList<String> itemNames = new ArrayList<>();
+    ArrayList<String> itemListId = new ArrayList<>();
+    ;
+    ArrayList<String> itemListItemCounts = new ArrayList<>();
     FirebaseFirestore db;
     SiteDetails siteDetail;
     ArrayAdapter adapter;
     Spinner spinner;
+    ListView projectsSectionsListView;
 
 //    ArrayAdapter adapter = new ArrayAdapter(AddSite.this, R.layout.support_simple_spinner_dropdown_item, supervisorList);
 
@@ -62,6 +70,7 @@ public class SupSelectProject extends AppCompatActivity {
         projectSupName = findViewById(R.id.projectSupName);
         spinnerArea = findViewById(R.id.spinnerArea);
         spinner = findViewById(R.id.itemListSup);
+        projectsSectionsListView = findViewById(R.id.projectsSectionsListView);
 
         Intent intent = getIntent();
         itemArrayList = new ArrayList<>();
@@ -130,11 +139,23 @@ public class SupSelectProject extends AppCompatActivity {
                     System.out.println("Item Name :" + i.getItemName());
                     filerArrayList.add(i);
                     spinnerItemList.add(j.getItemName());
+                } else {
+                    itemNames.add(j.getItemName());
+                    itemListId.add(j.getId());
+                    itemListItemCounts.add(Integer.toString(j.getCount()));
                 }
             }
         }
+//        itemNames.add("slkdsd");
+//        itemListId.add("s;kdskdsdk;");
+//        itemListItemCounts.add("5");
         adapter = new ArrayAdapter(SupSelectProject.this, R.layout.support_simple_spinner_dropdown_item, spinnerItemList);
         spinner.setAdapter(adapter);
+
+        ProgramAdapterForSite programAdapter = new ProgramAdapterForSite(this, itemListId, itemNames, itemListItemCounts);
+        projectsSectionsListView.setAdapter(programAdapter);
+
+
         progressBarSelectProject.setVisibility(View.GONE);
         basicDataProject.setVisibility(View.VISIBLE);
         selectSupProjectScroll.setVisibility(View.VISIBLE);
