@@ -98,10 +98,9 @@ public class AddSite extends AppCompatActivity {
         siteMap.put("supName", itemsSpinner.getSelectedItem());
         siteMap.put("supEmail", supervisorEmailList.get(selectedItemPosition));
         ArrayList<Item> itemsOfList = new ArrayList<>();
-        Item itemOfSite = new Item("0", 0);
-        Item itemOfSite1 = new Item("0", 0);
+        Item itemOfSite = new Item("test","0", 0);
         itemsOfList.add(itemOfSite);
-        itemsOfList.add(itemOfSite1);
+//        itemsOfList.add(itemOfSite1);
         siteMap.put("siteItems", itemsOfList);
         db.collection("sites")
                 .add(siteMap)
