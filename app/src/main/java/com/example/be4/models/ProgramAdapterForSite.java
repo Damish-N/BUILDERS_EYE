@@ -1,35 +1,47 @@
 package com.example.be4.models;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.be4.R;
+import com.example.be4.SupervisorProjects;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class ProgramAdapterForSite extends ArrayAdapter<String> {
     Context context;
+    String siteId;
     ArrayList<String> itemName;
     ArrayList<String> itemCount;
     ArrayList<String> itemId;
     ArrayList<Item> itemArrayList;
     ArrayList<String> itemRemainList;
+    Button btn;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public ProgramAdapterForSite(Context context, ArrayList<String> itemId, ArrayList<String> itemName, ArrayList<String> itemCount, ArrayList<Item> itemArrayList, ArrayList<String> itemRemainList) {
+    public ProgramAdapterForSite(Context context, String id, ArrayList<String> itemId, ArrayList<String> itemName, ArrayList<String> itemCount, ArrayList<Item> itemArrayList, ArrayList<String> itemRemainList, Button updateBtnSupProjects) {
         super(context, R.layout.single_card, R.id.itemNameCard, itemName);
         this.context = context;
+        this.siteId = id;
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemCount = itemCount;
         this.itemArrayList = itemArrayList;
         this.itemRemainList = itemRemainList;
+        this.btn = updateBtnSupProjects;
     }
 
     @NonNull
@@ -51,7 +63,8 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
 
         holder.itemName.setText(itemName.get(position));
         System.out.println("position :" + position);
-        holder.itemCount.setText("Selected :"+itemCount.get(position) + "AI: " + itemRemainList.get(position));
+        holder.itemCount.setText("Selected :" + itemCount.get(position) + "AI: " + itemRemainList.get(position));
+
 
         ProgramViewHolderSupervisor finalHolder = holder;
         final int[] val = {Integer.parseInt(itemCount.get(position))};
@@ -77,8 +90,9 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
                         --remain[0];
                         System.out.println(itemArrayList.get(p).count);
                         ++val[0];
-                        finalHolder.itemCount.setText("Selected :"+val[0] + "  AI:  " + remain[0]);
+                        finalHolder.itemCount.setText("Selected :" + val[0] + "  AI:  " + remain[0]);
                         itemCount.set(p, String.valueOf(val[0]));
+                        itemRemainList.set(p, String.valueOf(remain[0]));
                     }
 //                    Intent intent = new Intent(getContext(), UpdateItemPage.class);
 //                    intent.putExtra("id",itemId.get(position));
@@ -90,7 +104,62 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
                 }
         );
 
+        btn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (itemName.size() > 0) {
+                            ArrayList<Item> items = new ArrayList<>();
+                            for (int i = 0; i < itemName.size(); i++) {
+                                items.add(new Item(itemId.get(i), itemName.get(i), Integer.valueOf(itemCount.get(i))));
+                            }
+                            db.collection("sites")
+                                    .document(siteId)
+                                    .update("siteItems", items)
+                                    .addOnCompleteListener(
+                                            new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    Toast.makeText(context, "Updated List", Toast.LENGTH_SHORT).show();
+                                                    updateTheItemsOnQuery(items);
+                                                }
+                                            }
+                                    ).addOnFailureListener(
+                                            new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(context, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                    );
+
+                        }
+                    }
+                }
+        );
+
         return singleItem;
+    }
+
+    private void updateTheItemsOnQuery(ArrayList<Item> items) {
+        for (int i = 0; i < items.size(); i++) {
+            int finalI = i;
+            db.collection("items")
+                    .document(items.get(i).getId())
+                    .update("count", Integer.valueOf(itemRemainList.get(i)))
+                    .addOnCompleteListener(
+                            new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(context, "updated : " + items.get(finalI).getId(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                    );
+        }
+
+        Intent intent = new Intent(context, SupervisorProjects.class);
+        context.startActivity(intent);
+
     }
 
 }

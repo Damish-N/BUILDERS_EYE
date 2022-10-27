@@ -44,17 +44,17 @@ public class SupSelectProject extends AppCompatActivity {
     ArrayList<Item> itemArrayList;
     ArrayList<Item> supervisorSelectedList;
     ArrayList<Item> filerArrayList;
-    ArrayList<String> spinnerItemList;
+    ArrayList<String> spinnerItemList = new ArrayList<>();
     ArrayList<String> itemNames = new ArrayList<>();
     ArrayList<String> itemListId = new ArrayList<>();
     ArrayList<String> itemListItemCounts = new ArrayList<>();
-    ArrayList<String> itemRemainList =new ArrayList<>();
+    ArrayList<String> itemRemainList = new ArrayList<>();
     FirebaseFirestore db;
     SiteDetails siteDetail;
     ArrayAdapter adapter;
     Spinner spinner;
     ListView projectsSectionsListView;
-    Button addItemBtn;
+    Button addItemBtn, updateBtnSupProjects;
 
 //    ArrayAdapter adapter = new ArrayAdapter(AddSite.this, R.layout.support_simple_spinner_dropdown_item, supervisorList);
 
@@ -75,12 +75,13 @@ public class SupSelectProject extends AppCompatActivity {
         projectsSectionsListView = findViewById(R.id.projectsSectionsListView);
         addItemBtn = findViewById(R.id.addItemBtn);
         btnArea = findViewById(R.id.btnArea);
+        updateBtnSupProjects = findViewById(R.id.updateBtnSupProjects);
 
         Intent intent = getIntent();
         itemArrayList = new ArrayList<>();
         supervisorSelectedList = new ArrayList<>();
         filerArrayList = new ArrayList<>();
-        spinnerItemList = new ArrayList<>();
+
         spinnerItemList.add("Select Item");
 
 
@@ -137,27 +138,38 @@ public class SupSelectProject extends AppCompatActivity {
     }
 
     private void CheckTheList(List<Item> items) {
-        for (Item i : items) {
-            for (Item j : itemArrayList) {
+        System.out.println(items.size() + "is  " + " is " + itemArrayList.size());
+        for (int i = 0; i < itemArrayList.size(); i++) {
+            spinnerItemList.add(itemArrayList.get(i).getItemName());
+        }
+
+
+        for (Item j : itemArrayList) {
+            for (Item i : items) {
                 System.out.println(i.getId() + j.getId());
-                if (!Objects.equals(i.getId(), j.getId())) {
-                    System.out.println("Item Name :" + i.getItemName());
-                    filerArrayList.add(i);
-                    spinnerItemList.add(j.getItemName());
-                } else {
+                if (Objects.equals(i.getId(), j.getId())) {
                     itemNames.add(j.getItemName());
                     itemListId.add(j.getId());
-                    itemListItemCounts.add(Integer.toString(j.getCount()));
+                    itemRemainList.add(Integer.toString(j.getCount()));
+                    itemListItemCounts.add(Integer.toString(i.getCount()));
                 }
+//                } else {
+//                    System.out.println("Item Name :" + i.getItemName());
+//                    filerArrayList.add(i);
+//                    if (!spinnerItemList.contains(j.getItemName())) {
+//                        spinnerItemList.add(j.getItemName());
+//                    }
+//                }
             }
         }
+
 //        itemNames.add("slkdsd");
 //        itemListId.add("s;kdskdsdk;");
 //        itemListItemCounts.add("5");
         adapter = new ArrayAdapter(SupSelectProject.this, R.layout.support_simple_spinner_dropdown_item, spinnerItemList);
         spinner.setAdapter(adapter);
 
-        ProgramAdapterForSite programAdapter = new ProgramAdapterForSite(this, itemListId, itemNames, itemListItemCounts,itemArrayList,itemRemainList);
+        ProgramAdapterForSite programAdapter = new ProgramAdapterForSite(this, siteDetail.getId(), itemListId, itemNames, itemListItemCounts, itemArrayList, itemRemainList, updateBtnSupProjects);
         projectsSectionsListView.setAdapter(programAdapter);
 
 
@@ -176,19 +188,31 @@ public class SupSelectProject extends AppCompatActivity {
                         Toast.makeText(SupSelectProject.this, Integer.toString(spinner.getSelectedItemPosition()), Toast.LENGTH_SHORT).show();
                         int i = spinner.getSelectedItemPosition() - 1;
                         if (spinner.getSelectedItemPosition() != 0) {
-                            itemListId.add(itemArrayList.get(i).getId());
-                            itemNames.add(itemArrayList.get(i).getItemName());
-                            itemRemainList.add( Integer.toString(itemArrayList.get(i).getCount()));
+                            if (!itemNames.contains(spinner.getSelectedItem().toString())) {
+                                itemListId.add(itemArrayList.get(i).getId());
+                                itemNames.add(itemArrayList.get(i).getItemName());
+                                itemRemainList.add(Integer.toString(itemArrayList.get(i).getCount()));
 //                            Integer.toString(itemArrayList.get(i).getCount())
-                            itemListItemCounts.add("0");
-
-                            spinnerItemList.remove(spinner.getSelectedItemPosition());
-                            itemArrayList.remove(i);
+                                itemListItemCounts.add("0");
+                            } else {
+                                Toast.makeText(SupSelectProject.this, "Already addeed", Toast.LENGTH_SHORT).show();
+                            }
+//                            spinnerItemList.remove(spinner.getSelectedItemPosition());
+//                            itemArrayList.remove(i);
 
 //                            after Adding
                         }
                         programAdapter.notifyDataSetChanged();
-                        adapter.notifyDataSetChanged();
+//                        adapter.notifyDataSetChanged();
+                    }
+                }
+        );
+
+        updateBtnSupProjects.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
                     }
                 }
         );
