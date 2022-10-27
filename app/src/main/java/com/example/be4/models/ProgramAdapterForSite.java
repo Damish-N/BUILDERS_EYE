@@ -79,6 +79,16 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
 //                    }else {
 //                        val[0] = 0;
 //                        itemCount.set(position, "0");
+                    int p = position;
+                    if (val[0] > 0) {
+                        ++remain[0];
+                        System.out.println(itemArrayList.get(p).count);
+                        --val[0];
+                        finalHolder.itemCount.setText("Selected :" + val[0] + "  AI:  " + remain[0]);
+                        itemCount.set(p, String.valueOf(val[0]));
+                        itemRemainList.set(p, String.valueOf(remain[0]));
+                    }
+
                     Toast.makeText(context, "Cannot be item value ", Toast.LENGTH_SHORT).show();
 //                    }
                 }
