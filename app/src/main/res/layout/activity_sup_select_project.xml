@@ -102,6 +102,37 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/spinnerArea"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="25dp"
+            android:background="@drawable/round"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/itemListSup"
+                android:layout_weight="2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp">
+
+            </Spinner>
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="0.5"></Space>
+
+            <Button
+                android:id="@+id/addItemBtn"
+                android:layout_weight="0.1"
+                android:layout_width="wrap_content"
+                android:text="Add"
+                android:layout_height="50dp">
+            </Button>
+
+        </LinearLayout>
+
 
         <ScrollView
             android:id="@+id/selectSupProjectScroll"
