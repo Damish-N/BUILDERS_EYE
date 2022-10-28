@@ -89,49 +89,58 @@ public class Signup extends AppCompatActivity {
                         emailUser = String.valueOf(textInputEdittextEmail.getText());
 
 
+                        progressBar.setVisibility(View.VISIBLE);
+                        buttonsignUp.setVisibility(View.GONE);
+
                         user.put("firstName", fNameUser);
                         user.put("lastName", lNameUser);
                         user.put("email", emailUser);
 
+                        if (fNameUser.isEmpty() || lNameUser.isEmpty() || passwordUser.isEmpty() || emailUser.isEmpty()) {
+                            progressBar.setVisibility(View.GONE);
+                            buttonsignUp.setVisibility(View.VISIBLE);
+                            Toast.makeText(Signup.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
+                                    .addOnCompleteListener(Signup.this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
 
-                        mAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
-                                .addOnCompleteListener(Signup.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
 
-
-                                            db.collection("users")
-                                                    .add(user)
-                                                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                            Toast.makeText(Signup.this, "success", Toast.LENGTH_SHORT).show();
-                                                            Intent intent = new Intent(Signup.this, Login.class);
-                                                            startActivity(intent);
-                                                        }
-                                                    }).addOnFailureListener(
-                                                            new OnFailureListener() {
-                                                                @Override
-                                                                public void onFailure(@NonNull Exception e) {
-                                                                    Toast.makeText(Signup.this, "Fail", Toast.LENGTH_SHORT).show();
-
-                                                                }
+                                                db.collection("users")
+                                                        .add(user)
+                                                        .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                                progressBar.setVisibility(View.GONE);
+                                                                buttonsignUp.setVisibility(View.VISIBLE);
+                                                                Toast.makeText(Signup.this, "success", Toast.LENGTH_SHORT).show();
+                                                                Intent intent = new Intent(Signup.this, Login.class);
+                                                                startActivity(intent);
                                                             }
-                                                    );
+                                                        }).addOnFailureListener(
+                                                                new OnFailureListener() {
+                                                                    @Override
+                                                                    public void onFailure(@NonNull Exception e) {
+                                                                        Toast.makeText(Signup.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    }
+                                                                }
+                                                        );
 
+                                                // Sign in success, update UI with the signed-in user's information
+                                                FirebaseUser user = mAuth.getCurrentUser();
 
-                                            // Sign in success, update UI with the signed-in user's information
-                                            FirebaseUser user = mAuth.getCurrentUser();
-
-                                        } else {
-                                            // If sign in fails, display a message to the user.
-                                            Toast.makeText(Signup.this, "Authentication failed.",
-                                                    Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                // If sign in fails, display a message to the user.
+                                                Toast.makeText(Signup.this, "Authentication failed.",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
                                         }
-                                    }
-                                });
-
+                                    });
+                        }
+                        progressBar.setVisibility(View.GONE);
+                        buttonsignUp.setVisibility(View.VISIBLE);
 
                     }
                 }

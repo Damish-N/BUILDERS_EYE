@@ -62,7 +62,7 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
         }
 
         holder.itemName.setText(itemName.get(position));
-        System.out.println("position :" + position);
+//        System.out.println("position :" + position);
         holder.itemCount.setText("Selected :" + itemCount.get(position) + "AI: " + itemRemainList.get(position));
 
 
@@ -89,7 +89,7 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
                         itemRemainList.set(p, String.valueOf(remain[0]));
                     }
 
-                    Toast.makeText(context, "Cannot be item value ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "Cannot be item value ", Toast.LENGTH_SHORT).show();
 //                    }
                 }
         );
@@ -109,7 +109,7 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
 //                    intent.putExtra("itemName", itemName.get(position));
 //                    intent.putExtra("count", itemCount.get(position));
 //                    context.startActivity(intent);
-                    Toast.makeText(context, "Cannot be item value ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "Cannot be item value ", Toast.LENGTH_SHORT).show();
 
                 }
         );
