@@ -60,8 +60,10 @@ public class UpdateItemPage extends AppCompatActivity {
         addItemMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                --n;
-                countItem.setText(String.valueOf(n));
+                if(n>0){
+                    --n;
+                    countItem.setText(String.valueOf(n));
+                }
             }
         });
 

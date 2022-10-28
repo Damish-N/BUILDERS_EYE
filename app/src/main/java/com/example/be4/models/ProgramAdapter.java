@@ -48,7 +48,7 @@ public class ProgramAdapter extends ArrayAdapter<String> {
         }
 
         holder.itemName.setText(itemName.get(position));
-        System.out.println(itemCount.get(position));
+//        System.out.println(itemCount.get(position));
         holder.itemCount.setText(itemCount.get(position));
 
         ProgramViewHolder finalHolder = holder;

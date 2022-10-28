@@ -138,7 +138,6 @@ public class SupSelectProject extends AppCompatActivity {
     }
 
     private void CheckTheList(List<Item> items) {
-        System.out.println(items.size() + "is  " + " is " + itemArrayList.size());
         for (int i = 0; i < itemArrayList.size(); i++) {
             spinnerItemList.add(itemArrayList.get(i).getItemName());
         }
@@ -195,7 +194,7 @@ public class SupSelectProject extends AppCompatActivity {
 //                            Integer.toString(itemArrayList.get(i).getCount())
                                 itemListItemCounts.add("0");
                             } else {
-                                Toast.makeText(SupSelectProject.this, "Already addeed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SupSelectProject.this, "Already added", Toast.LENGTH_SHORT).show();
                             }
 //                            spinnerItemList.remove(spinner.getSelectedItemPosition());
 //                            itemArrayList.remove(i);
