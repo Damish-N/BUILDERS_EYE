@@ -92,7 +92,7 @@
     <ScrollView
         android:id="@+id/viewArea"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="800dp"
         android:background="@drawable/round"
         android:layout_marginHorizontal="25dp"
         android:layout_weight="5"
@@ -100,12 +100,12 @@
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="500dp"
+           android:layout_height="match_parent"
            android:orientation="vertical">
            <ListView
                android:id="@+id/mainItem"
                android:layout_width="wrap_content"
-               android:layout_height="240dp"
+               android:layout_height="700dp"
                android:layout_margin="10dp"></ListView>
        </LinearLayout>
 
