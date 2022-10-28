@@ -7,12 +7,14 @@
 
     <TextView
         android:id="@+id/itemNameCard"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
+        android:maxWidth="140dp"
         android:layout_height="wrap_content"
         android:layout_weight="3"
         android:padding="10dp"
+        android:gravity="left"
         android:text="Item -1"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textColor="@color/black"
         android:textSize="15dp"
         android:textStyle="bold" />
@@ -24,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="3"
+        android:maxWidth="140dp"
         android:text="No of Items: "
         >
 
@@ -32,6 +35,7 @@
     <TextView
         android:id="@+id/itemCountCard"
         android:layout_width="wrap_content"
+        android:maxWidth="120dp"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:paddingLeft="10dp"
@@ -44,6 +48,7 @@
         android:id="@+id/updateBtnOwner"
         android:layout_width="100dp"
         android:layout_height="40dp"
+        android:gravity="right"
         android:text="Update"></Button>
 
 

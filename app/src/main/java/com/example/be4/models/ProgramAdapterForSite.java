@@ -63,7 +63,7 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
 
         holder.itemName.setText(itemName.get(position));
 //        System.out.println("position :" + position);
-        holder.itemCount.setText("Selected :" + itemCount.get(position) + "AI: " + itemRemainList.get(position));
+        holder.itemCount.setText("Selected :    " + itemCount.get(position) + " \n Available:   " + itemRemainList.get(position));
 
 
         ProgramViewHolderSupervisor finalHolder = holder;
@@ -84,7 +84,7 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
                         ++remain[0];
                         System.out.println(itemArrayList.get(p).count);
                         --val[0];
-                        finalHolder.itemCount.setText("Selected :" + val[0] + "  AI:  " + remain[0]);
+                        finalHolder.itemCount.setText("Selected :   " + val[0] + "\n Available:    " + remain[0]);
                         itemCount.set(p, String.valueOf(val[0]));
                         itemRemainList.set(p, String.valueOf(remain[0]));
                     }
@@ -100,7 +100,7 @@ public class ProgramAdapterForSite extends ArrayAdapter<String> {
                         --remain[0];
                         System.out.println(itemArrayList.get(p).count);
                         ++val[0];
-                        finalHolder.itemCount.setText("Selected :" + val[0] + "  AI:  " + remain[0]);
+                        finalHolder.itemCount.setText("Selected :   " + val[0] + "\n  Available:  " + remain[0]);
                         itemCount.set(p, String.valueOf(val[0]));
                         itemRemainList.set(p, String.valueOf(remain[0]));
                     }
